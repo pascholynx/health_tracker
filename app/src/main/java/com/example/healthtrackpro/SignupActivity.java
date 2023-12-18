@@ -28,7 +28,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextView logInLink;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class SignupActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        usersRef = FirebaseDatabase.getInstance().getReference("users");
 
         // Initialize views
         editTextUsername = findViewById(R.id.editTextText);
@@ -75,7 +73,9 @@ public class SignupActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             saveUserDetails(user.getUid(), username, email);
                             Toast.makeText(SignupActivity.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignupActivity.this, DashboardActivity.class));
+
+                            // Redirect to LoginActivity after successful signup
+                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                         } else {
                             Toast.makeText(SignupActivity.this, "Sign up failed. Please try again.",
                                     Toast.LENGTH_SHORT).show();
@@ -84,16 +84,25 @@ public class SignupActivity extends AppCompatActivity {
                 });
     }
 
+
     private void saveUserDetails(String userId, String username, String email) {
+        // Create a User object with username and email
         User newUser = new User(username, email);
+
+        // Get reference to the 'users' node in the database
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+
+        // Save the user details under the userId in the 'users' node
         usersRef.child(userId).setValue(newUser)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // User details saved successfully
+                        Toast.makeText(SignupActivity.this, "User details saved successfully!", Toast.LENGTH_SHORT).show();
                     } else {
                         // Failed to save user details
+                        Toast.makeText(SignupActivity.this, "Failed to save user details. Please try again.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 }
-
