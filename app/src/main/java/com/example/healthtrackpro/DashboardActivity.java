@@ -59,14 +59,12 @@ public class DashboardActivity extends AppCompatActivity {
             String userId = currentUser.getUid();
 
             // Retrieve the username from Firebase Database using the UID
-            usersRef.child(userId);
-            usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // Retrieve the username and set it in the TextView
                     if (dataSnapshot.exists()) {
-                        User user = dataSnapshot.getValue(User.class);
-                        String userName = user.getUsername();
+                        String userName = dataSnapshot.child("username").getValue(String.class);
                         username.setText(userName);
                     }
                 }
@@ -77,5 +75,6 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 }
