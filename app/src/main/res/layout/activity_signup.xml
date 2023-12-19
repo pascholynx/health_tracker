@@ -50,6 +50,7 @@
         android:drawableTint="@color/white"
         android:foregroundTint="@color/white"
         android:text="Get Started"
+        android:textColor="@color/white"
         android:textColorHighlight="@color/white"
         android:textColorLink="@color/white"
         app:iconTint="@color/white"
