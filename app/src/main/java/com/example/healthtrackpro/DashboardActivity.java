@@ -1,9 +1,15 @@
 package com.example.healthtrackpro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,17 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class DashboardActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -48,7 +43,6 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
     private ProgressBar distanceProgressBar;
     private ProgressBar energyProgressBar;
     private int stepsCount = 0;
-    private long lastStepTimestamp = 0;
 
     private double MagnitudePrevious = 0;
     // Constant for an average step length in meters
@@ -63,13 +57,7 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        stepsTextView = findViewById(R.id.stepsTextView);
-        distanceTextView = findViewById(R.id.distanceTextView);
-        energyTextView = findViewById(R.id.energyTextView);
 
-        stepProgressBar = findViewById(R.id.stepProgressBar);
-        distanceProgressBar = findViewById(R.id.distanceProgressBar);
-        energyProgressBar = findViewById(R.id.energyProgressBar);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -78,11 +66,19 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
         // Initialize Firebase Database reference
         usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-        // Initialize the TextView
+        // Initialize the Layout elements
         username = findViewById(R.id.username);
+        stepsTextView = findViewById(R.id.stepsTextView);
+        distanceTextView = findViewById(R.id.distanceTextView);
+        energyTextView = findViewById(R.id.energyTextView);
+
+        stepProgressBar = findViewById(R.id.stepProgressBar);
+        distanceProgressBar = findViewById(R.id.distanceProgressBar);
+        energyProgressBar = findViewById(R.id.energyProgressBar);
 
         ImageView logoutImageView = findViewById(R.id.imageView3);
 
+        //Log out button
         logoutImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             stepsCount = (int) event.values[0];
-            stepsTextView.setText("Steps: " + stepsCount);
+            stepsTextView.setText(stepsCount + " / 200 steps ");
             updateDistanceAndEnergy();
         } else if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             handleAccelerometerData(event.values);
@@ -148,15 +144,6 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
     private void handleAccelerometerData(float[] values) {
         // Handle accelerometer data as needed
         // Example: Detect steps based on acceleration changes
-//        float acceleration = Math.abs(values[0] + values[1] + values[2]);
-//        if (acceleration > 10 && System.currentTimeMillis() - lastStepTimestamp > 500) {
-//            // Assuming a step is detected when acceleration exceeds a threshold
-//            lastStepTimestamp = System.currentTimeMillis();
-//            stepsCount++;
-//            stepsTextView.setText("Steps: " + stepsCount);
-//            updateDistanceAndEnergy();
-//        }
-
         float x_acceleration = values[0];
         float y_acceleration = values[1];
         float z_acceleration = values[2];
@@ -167,7 +154,7 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
 
         if (MagnitudeDelta > 6){
             stepsCount++;
-            stepsTextView.setText("Steps: " + stepsCount);
+            stepsTextView.setText(stepsCount + " / 200 steps ");
             updateDistanceAndEnergy();
         }
     }
@@ -175,15 +162,15 @@ public class DashboardActivity extends AppCompatActivity implements SensorEventL
     private void updateDistanceAndEnergy() {
         // Calculate distance based on step count and average step length
         float distance = stepsCount * AVERAGE_STEP_LENGTH;
-        distanceTextView.setText("Distance: " + distance + " meters");
+        distanceTextView.setText(distance + " meters");
 
         // Calculate energy expenditure based on MET value
         float energy = stepsCount * MET_VALUE;
-        energyTextView.setText("Energy: " + energy + " kcal");
+        energyTextView.setText(energy + " / 2000 kcal");
 
         // Define scaling factors for mapping values to progress bar range
-        float distanceScale = 0.2f;  // Example: 1 meter corresponds to 10 progress units
-        float energyScale = 0.1f;    // Example: 1 kcal corresponds to 20 progress units
+        float distanceScale = 0.2f;  
+        float energyScale = 0.1f;   
         float stepscale = 0.5f;
 
         // Map calculated values to progress bar ranges

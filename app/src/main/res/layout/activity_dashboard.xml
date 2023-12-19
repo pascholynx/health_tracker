@@ -49,10 +49,10 @@
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greetings_card"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.31">
 
 
         <ProgressBar
@@ -60,27 +60,27 @@
             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
+            android:paddingTop="5dp"
             android:progressBackgroundTint="@color/white"
             android:progressTint="@color/green"
-            app:layout_constraintBottom_toTopOf="@+id/energyProgressBar"
+            app:layout_constraintBottom_toTopOf="@+id/Calories"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridhead"
-            app:layout_constraintVertical_bias="0.632" />
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <ProgressBar
             android:id="@+id/energyProgressBar"
             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="124dp"
+            android:layout_marginBottom="48dp"
+            android:paddingTop="5dp"
             android:progressBackgroundTint="@color/white"
             android:progressTint="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_bias="0.525"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
@@ -88,101 +88,131 @@
             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="184dp"
+            android:layout_marginBottom="4dp"
+            android:paddingTop="5dp"
             android:progressBackgroundTint="@color/white"
             android:progressTint="@color/green"
+            app:layout_constraintBottom_toTopOf="@+id/DistanceCovered"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/DistanceCovered"
-            android:layout_width="113dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Distance Covered"
+            android:drawableStart="@drawable/gap"
+            android:drawableTint="@color/white"
+            android:paddingTop="18dp"
+            android:text=" DISTANCE COVERED"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/energyProgressBar"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/distanceTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stepProgressBar"
-            app:layout_constraintVertical_bias="0.442" />
-
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/StepCountTextView"
-            android:layout_width="87dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Step Counter"
+            android:drawableStart="@drawable/steps"
+            android:drawableTint="@color/white"
+            android:text=" STEPS"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/stepProgressBar"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/stepsTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridhead"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/stepsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
+            android:layout_marginVertical="8dp"
             android:text="0 Steps"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/DistanceCovered"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stepProgressBar"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/stepProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/distanceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="0 km"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/Calories"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/distanceProgressBar"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/distanceProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/energyTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0 km"
+            android:paddingTop="5dp"
+            android:text="0 kcal"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/energyProgressBar"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/energyProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/Calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calories"
+            android:drawableStart="@drawable/bolt"
+            android:drawableTint="@color/white"
+            android:paddingTop="18dp"
+            android:text=" ACTIVE ENERGY"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/energyProgressBar"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/energyTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/distanceProgressBar"
-            app:layout_constraintVertical_bias="0.855" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/gridhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="How are you feeling?"
+            android:text="Let's exercise today"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/gridhead2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/gridhead2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="84dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Take a look at your stats below"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/StepCountTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -190,7 +220,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:layout_marginTop="164dp"
         android:layout_marginBottom="60dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +233,7 @@
             android:id="@+id/greetings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello,"
+            android:text="Welcome"
             android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -214,7 +243,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="Username"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -227,6 +256,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
