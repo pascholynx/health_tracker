@@ -38,7 +38,8 @@ Before running the app, make sure to:
 Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests.
 
 ## Authors
-- [Chidozie Inya](https://github.com/pascho;ynx)
+- [Chidozie Inya](https://github.com/pascholynx)
+- [Eke Grant](https://github.com/ekegrant59)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
